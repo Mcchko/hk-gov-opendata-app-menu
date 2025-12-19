@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香港政府開放數據項目</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .description {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .accordion {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .category-item {
+            border-bottom: 1px solid #e1e5eb;
+        }
+        
+        .category-item:last-child {
+            border-bottom: none;
+        }
+        
+        .category-header {
+            background-color: #3498db;
+            color: white;
+            padding: 18px 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .category-header:hover {
+            background-color: #2980b9;
+        }
+        
+        .category-header.active {
+            background-color: #2c3e50;
+        }
+        
+        .toggle-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .category-header.active .toggle-icon {
+            transform: rotate(45deg);
+        }
+        
+        .usage-list {
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .usage-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .usage-item:last-child {
+            border-bottom: none;
+        }
+        
+        .usage-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .usage-item:hover .usage-text {
+            color: #3498db;
+        }
+        
+        .usage-text {
+            font-size: 1rem;
+            color: #34495e;
+            flex-grow: 1;
+        }
+        
+        .link-icon {
+            color: #95a5a6;
+            margin-left: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            padding: 20px 0;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        .console-info {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .category-header {
+                padding: 15px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>香港政府開放數據項目</h1>
+            <p class="description">按類別和用途分組的項目手風琴介面。點擊任何用途項目將其 GitHub 連結記錄到控制台。</p>
+        </header>
+        
+        <div class="accordion" id="accordion-container">
+            <!-- Accordion items will be generated here by JavaScript -->
+        </div>
+        
+        <div class="console-info">
+            <p><strong>控制台記錄：</strong>點擊上方任何「用途」項目，將其對應連結記錄到瀏覽器控制台。</p>
+            <p>打開開發者工具（F12）查看控制台輸出。</p>
+        </div>
+        
+        <footer class="footer">
+            <p>香港的士站位置地圖 | 數據來源：香港政府數據中心 | 更新時間: <span id="data-timestamp">19/12/2025 下午12:16:02</span></p>
+        </footer>
+    </div>
+    <script>
+        // Sample data with emojis
+        const data = [
+            {
+                "類別": "🏠 房屋",
+                "用途": "🏘️ 公共屋村",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-app-public-housing-estates"
+            },
+            {
+                "類別": "🤝 助人",
+                "用途": "🔍 尋人啟示",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-app-missing-person"
+            },
+            {
+                "類別": "🎓 大專學生",
+                "用途": "💰 專上課程學生資助計劃",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-sfo-application-deadlines"
+            },
+            {
+                "類別": "🎭 活動",
+                "用途": "🚶 孫中山史蹟徑",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-sunyatsen-historical-trail"
+            },
+            {
+                "類別": "🏫 學校",
+                "用途": "📚 自修室",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-facilities-studyroom"
+            },
+            {
+                "類別": "🎭 活動",
+                "用途": "🏀 籃球場",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-facilities-basketball-court"
+            },
+            {
+                "類別": "🏢 社區設施",
+                "用途": "🧗 運動攀登設施",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-facilities-scf"
+            },
+            {
+                "類別": "🏢 社區設施",
+                "用途": "👵 老人中心",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-facilities-elderaca"
+            },
+            {
+                "類別": "🏢 社區設施",
+                "用途": "👦 青年中心",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-facilities-icyscs"
+            },
+            {
+                "類別": "🏢 社區設施",
+                "用途": "👨‍👩‍👧‍👦 家庭服務中心",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-facilities-rsr"
+            },
+            {
+                "類別": "🎭 活動",
+                "用途": "🏸 羽毛球場",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-facilities-badminton"
+            },
+            {
+                "類別": "🎭 活動",
+                "用途": "🍖 燒烤",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-facilities-bbq"
+            },
+            {
+                "類別": "🏗️ 基建",
+                "用途": "💧 水塘",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-infrastructure-water-reservoir"
+            },
+            {
+                "類別": "🏠 房屋",
+                "用途": "🏢 私人大廈",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-private-buildings"
+            },
+            {
+                "類別": "🚗 交通",
+                "用途": "🚖 的士站",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-transport-taxi"
+            },
+            {
+                "類別": "🚗 交通",
+                "用途": "📸 影快相",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-car-camera"
+            },
+            {
+                "類別": "🚗 交通",
+                "用途": "🅿️ 新式咪錶泊車",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-metered-parking-vacancy"
+            },
+            {
+                "類別": "🚗 交通",
+                "用途": "🅿️ 停車場",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-parking-vacancy"
+            },
+            {
+                "類別": "🍽️ 飲食",
+                "用途": "🍴 食肆",
+                "連結": "https://mcchko.github.io/hk-restaurants/"
+            },
+            {
+                "類別": "🍽️ 飲食",
+                "用途": "🥩 原料供應商",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-food-licenses/"
+            },
+            {
+                "類別": "🎭 活動",
+                "用途": "🥾 香港遠足路線",
+                "連結": "https://mcchko.github.io/hk-gov-opendata-hiking-trails"
+            }
+        ];
+        
+        // Group data by category
+        function groupByCategory(data) {
+            const grouped = {};
+            
+            data.forEach(item => {
+                const category = item["類別"];
+                if (!grouped[category]) {
+                    grouped[category] = [];
+                }
+                grouped[category].push(item);
+            });
+            
+            return grouped;
+        }
+        
+        // Create accordion HTML
+        function createAccordionHTML(groupedData) {
+            let html = '';
+            
+            Object.keys(groupedData).forEach(category => {
+                const items = groupedData[category];
+                
+                html += `
+                <div class="category-item">
+                    <div class="category-header">
+                        <span>${category}</span>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="usage-list">
+                `;
+                
+                items.forEach(item => {
+                    html += `
+                    <div class="usage-item" data-link="${item["連結"]}">
+                        <span class="usage-text">${item["用途"]}</span>
+                        <span class="link-icon">🔗</span>
+                    </div>
+                    `;
+                });
+                
+                html += `
+                    </div>
+                </div>
+                `;
+            });
+            
+            return html;
+        }
+        
+        // Initialize accordion
+        function initAccordion() {
+            const accordionContainer = document.getElementById('accordion-container');
+            const groupedData = groupByCategory(data);
+            accordionContainer.innerHTML = createAccordionHTML(groupedData);
+            
+            // Add event listeners to category headers
+            const categoryHeaders = document.querySelectorAll('.category-header');
+            categoryHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    // Toggle active class on header
+                    this.classList.toggle('active');
+                    
+                    // Get the usage list (next sibling element)
+                    const usageList = this.nextElementSibling;
+                    
+                    // Toggle the height of the usage list
+                    if (usageList.style.maxHeight) {
+                        usageList.style.maxHeight = null;
+                    } else {
+                        usageList.style.maxHeight = usageList.scrollHeight + "px";
+                    }
+                });
+            });
+            
+            // Add event listeners to usage items
+            const usageItems = document.querySelectorAll('.usage-item');
+            usageItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const link = this.getAttribute('data-link');
+                    window.open(link, "_self");
+                    
+                    // Log to console
+                    console.log(`點擊用途：${this.querySelector('.usage-text').textContent}`);
+                    console.log(`連結：${link}`);
+                    
+                    // Visual feedback
+                    this.style.backgroundColor = '#e8f4fc';
+                    setTimeout(() => {
+                        this.style.backgroundColor = '';
+                    }, 300);
+                });
+            });
+            
+            // Open first category by default
+            if (categoryHeaders.length > 0) {
+                categoryHeaders[0].click();
+            }
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initAccordion);
+    </script>
+</body>
+</html>
