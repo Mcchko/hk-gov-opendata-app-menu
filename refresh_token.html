@@ -1,1 +1,361 @@
-abc
+Here is the HTML code for your magician-themed CV. It's a self-contained webpage that creatively translates your technical experience into an "arcane engineering" portfolio.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mak Chun Chi · Arcane Engineer CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0e14;
+            font-family: 'Segoe UI', 'Cormorant Garamond', 'Georgia', serif;
+            line-height: 1.5;
+            color: #e3e6f0;
+            padding: 2rem 1rem;
+        }
+
+        /* parchment & magic vibe */
+        .cv-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #11161f;
+            background-image: radial-gradient(circle at 25% 40%, rgba(80, 60, 120, 0.08) 2%, transparent 2.5%),
+                              radial-gradient(circle at 70% 85%, rgba(180, 140, 80, 0.05) 1.8%, transparent 2%);
+            background-size: 48px 48px, 36px 36px;
+            border: 1px solid rgba(210, 180, 140, 0.3);
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            backdrop-filter: blur(0px);
+        }
+
+        /* inner scroll charm */
+        .cv-paper {
+            padding: 2rem 2rem 2.8rem;
+        }
+
+        /* typography */
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #f2e9c7, #c7b9a2, #e0cfb0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+            margin-bottom: 0.3rem;
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            color: #b9c7d9;
+            border-left: 3px solid #c9aa5f;
+            padding-left: 1rem;
+            margin: 0.5rem 0 1rem 0;
+            font-style: italic;
+        }
+
+        .arcane-tagline {
+            font-family: monospace;
+            background: #1e2533;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            color: #e0cf9a;
+            margin-bottom: 2rem;
+            border: 1px solid #4a3f2c;
+            letter-spacing: 0.5px;
+        }
+
+        .quote {
+            font-style: italic;
+            text-align: right;
+            font-size: 0.9rem;
+            color: #a9b7d4;
+            margin-bottom: 2rem;
+            border-top: 1px dashed #2c3543;
+            padding-top: 1rem;
+        }
+
+        /* section styling */
+        section {
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            border-bottom: 2px solid #c9aa5f;
+            display: inline-block;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            color: #eedba7;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 1rem 0 0.25rem 0;
+            color: #ddceac;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .date {
+            font-family: monospace;
+            font-size: 0.8rem;
+            font-weight: normal;
+            color: #9aaec0;
+        }
+
+        .role-meta {
+            font-size: 0.9rem;
+            color: #b7c7da;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* grid for competencies */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .competency-card {
+            background: rgba(30, 35, 48, 0.6);
+            border-radius: 20px;
+            padding: 1rem;
+            border: 1px solid #2f3a48;
+            backdrop-filter: blur(2px);
+        }
+
+        .competency-card strong {
+            color: #e7cf92;
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .magic-translate {
+            font-size: 0.9rem;
+            color: #cbdae9;
+        }
+
+        /* list style */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 0.65rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        li::before {
+            content: "✦";
+            color: #c9aa5f;
+            position: absolute;
+            left: 0;
+            font-size: 0.85rem;
+        }
+
+        .achievement-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .achievement-card {
+            background: #0f141e;
+            border-left: 4px solid #c9aa5f;
+            padding: 0.8rem 1rem;
+            flex: 1 1 200px;
+            border-radius: 14px;
+            transition: all 0.2s;
+        }
+
+        .achievement-card strong {
+            color: #efdfa8;
+            font-size: 1rem;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, #2c3543, #c9aa5f60, #2c3543);
+            margin: 1.5rem 0;
+        }
+
+        /* footer */
+        .sigil {
+            text-align: center;
+            font-size: 0.8rem;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #222b36;
+            color: #7f8c9a;
+        }
+
+        @media (max-width: 680px) {
+            .cv-paper {
+                padding: 1.2rem;
+            }
+            h1 {
+                font-size: 2.4rem;
+            }
+            .quote {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="cv-container">
+    <div class="cv-paper">
+        <!-- header with mystical vibe -->
+        <h1>Mak Chun Chi</h1>
+        <div class="subhead">Practitioner of Applied Arcane Engineering · 6+ years casting reliable illusions</div>
+        <div class="arcane-tagline">⚡ "Any sufficiently advanced technology is indistinguishable from magic." – Clarke's Third Law</div>
+
+        <!-- Core Arcane Competencies -->
+        <section>
+            <h2>✦ Core Arcane Competencies</h2>
+            <div class="grid-2">
+                <div class="competency-card">
+                    <strong>🗣️ Incantation Syntaxes</strong>
+                    <div class="magic-translate">C# · Java · PHP · JavaScript (Node/React/Express)</div>
+                    <div style="font-size:0.85rem; margin-top:6px;">Weaving logic-threads across multiple schools of thought</div>
+                </div>
+                <div class="competency-card">
+                    <strong>📜 Grimoires & Foci</strong>
+                    <div class="magic-translate">.NET · Spring Boot · LAMP · React/Node.js</div>
+                    <div style="font-size:0.85rem; margin-top:6px;">Commanding pre-built enchantments to accelerate manifestation</div>
+                </div>
+                <div class="competency-card">
+                    <strong>📀 Akashic Repositories</strong>
+                    <div class="magic-translate">SQL (MySQL, MS SQL) · NoSQL</div>
+                    <div style="font-size:0.85rem; margin-top:6px;">Storing stable records from the fabric of reality</div>
+                </div>
+                <div class="competency-card">
+                    <strong>🧪 Containment & Chronomancy</strong>
+                    <div class="magic-translate">Docker · Git · Root Cause Analysis · CI/CD mindset</div>
+                    <div style="font-size:0.85rem; margin-top:6px;">Isolating unstable experiments & post-failure divination</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Certifications -->
+        <section>
+            <h2>📖 Education & Arcane Credentials</h2>
+            <ul>
+                <li><strong>Bachelor of Engineering in Electrical Engineering</strong> – The Hong Kong Polytechnic University (2014–2016)<br>
+                    <span class="magic-translate">Thesis: "Solar Energy Optimization System" – directing ambient energy flows</span></li>
+                <li><strong>Higher Diploma in Electrical Engineering</strong> – PolyU (2012–2014)<br>
+                    <span class="magic-translate">Project: "Embedded Line-follower Robot" – autonomous servitor creation</span></li>
+                <li><strong>CompTIA Network+ (N10-009)</strong> – 2026 → <em>Certified Ley Line Network Weaver</em></li>
+                <li><strong>ISC2 CISSP Core Curriculum</strong> – 2026 → <em>Arcane Security Principles (Oath of Responsible Enchantment)</em></li>
+                <li><strong>CompTIA Networking+ (Udemy)</strong> – 2026 → <em>Foundations of Inter-System Scrying</em></li>
+            </ul>
+        </section>
+
+        <!-- Professional Chronicle (Experience) -->
+        <section>
+            <h2>🏛️ Professional Chronicle</h2>
+
+            <div>
+                <h3>Analyst Programmer (Enchanter Class) @ IT Solutions Ltd. <span class="date">Jul 2025 – Present</span></h3>
+                <div class="role-meta">⚡ Assigned to the Hong Kong Observatory · Seismic Scrying Division</div>
+                <ul>
+                    <li>Developed a <strong>React + Express + Node.js</strong> web application – a <em>Seismic Sensing Mirror</em> – to visualise locally felt earthquake reports, deployed inside a secured warded container (Docker).</li>
+                    <li>Authored technical scrolls (documentation) & performed <strong>preventive chronomancy</strong> (root cause analysis) to reduce recurring glitches across the observatory network.</li>
+                    <li>Strengthened reliability with proactive monitoring, earning trust from senior conjurers.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Analyst Programmer (Conjurer) @ Kelly Services <span class="date">Jun 2022 – Jun 2025</span></h3>
+                <div class="role-meta">🌍 Hong Kong Observatory · Tectonic Intelligence Repository</div>
+                <ul>
+                    <li>Built full-stack earthquake data dissemination platform using <strong>PHP/LAMP stack</strong> inside Docker containers; enforced client-side validation as first line of defense against corrupted inputs.</li>
+                    <li>Led <strong>Root Cause Analysis (RCA) initiatives</strong> – post-failure divination – implementing preventive patches that drastically reduced system collapse events.</li>
+                    <li>Managed WordPress-based <strong>grimoire hub</strong> (technical documentation hub); standardised user guides for 3 internal applications, adopted team-wide as official reference.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Solution Developer (Artificer) @ PCCW <span class="date">Sep 2019 – Jun 2022</span></h3>
+                <ul>
+                    <li>Conjured web-based <strong>Appointment Binding System</strong> (C# .NET) with real-time availability validation, rescheduling, and cancellations.</li>
+                    <li>Built a Windows Forms desktop application as a <em>query portal to backend dimensional stores</em>.</li>
+                    <li>Implemented multithreaded socket server in Java – allowing concurrent client connections for real-time data exchange (<em>simultaneous messaging familiars</em>).</li>
+                    <li>Collaborated on a Spring Boot workflow management system – automating repetitive arcane processes.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Key Arcane Achievements (table/grid style) -->
+        <section>
+            <h2>✨ Noteworthy Arcane Feats</h2>
+            <div class="achievement-grid">
+                <div class="achievement-card">
+                    <strong>⚡ Containerisation Migration (Spatial Folding)</strong><br>
+                    Migrated two legacy earthquake reporting systems to <strong>Docker + LAMP / MERN</strong> stacks. Impact: deployment consistency, easy rollback, maintainability across HKO infrastructure.
+                </div>
+                <div class="achievement-card">
+                    <strong>📉 Reliability Improvement (Curse Breaking)</strong><br>
+                    Reduced recurring system incidents through proactive monitoring + root cause analysis. Enhanced platform stability and user trust – <em>fewer unexpected magical failures</em>.
+                </div>
+                <div class="achievement-card">
+                    <strong>📘 Grimoire Keeping (Documentation)</strong><br>
+                    Authored user guides & technical runbooks for 3+ internal apps, adopted as official team standard. <em>Even wizards need clear instructions</em>.
+                </div>
+                <div class="achievement-card">
+                    <strong>🔐 Warding & Occlumency</strong><br>
+                    Completed CompTIA Network+ & ISC2 CISSP core curriculum – defense against both digital and arcane intrusion.
+                </div>
+            </div>
+        </section>
+
+        <!-- Academic early training & methodology -->
+        <section>
+            <h2>🧪 Early Arcane Training</h2>
+            <ul>
+                <li><strong>Solar Energy Optimization System</strong> (Bachelor Thesis, 2015-2016) – Optimised solar panel efficiency via load analysis and tracking algorithms. <em>Transmuting sunlight into usable power.</em></li>
+                <li><strong>Embedded Line-follower Robot</strong> (Higher Diploma, 2013-2014) – Developed a driverless car using sensor fusion and microcontroller logic. <em>An autonomous familiar that obeys painted paths.</em></li>
+            </ul>
+        </section>
+
+        <!-- Personal magical philosophy -->
+        <div class="quote">
+            “I approach system reliability like a stage magician approaches a trick – rigorous practice, invisible complexity, and a seamless user experience.”
+        </div>
+
+        <hr>
+
+        <!-- contact / summons -->
+        <div class="sigil">
+            ✦ Available for summons: practical demonstrations of arcane engineering can be arranged. ✦<br>
+            References & portfolio scrolls provided upon request.
+        </div>
+    </div>
+</div>
+</body>
+</html>
+```
